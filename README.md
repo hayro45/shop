@@ -1,6 +1,6 @@
 # Shop
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+A little shopping app I made while learning angular and typescript
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6. 
 
 ## Development server
 
