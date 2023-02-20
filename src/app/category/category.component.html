@@ -3,5 +3,5 @@
     <a class="active list-group-item" href="#">Tüm Ürünler</a>
 </div>
 <div class="list-group" *ngFor="let category of categories">
-    <a class="list-group-item" href="#">{{category.name}}</a>
+    <a class="list-group-item" routerLink="products/category/{{category.id}}" routerLinkActive="">{{category.name}}</a>
 </div>
