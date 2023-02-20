@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
 import { AlertifyService } from '../services/alertify.service';
 import { ProductService } from '../services/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -12,7 +13,7 @@ import { ProductService } from '../services/product.service';
   providers:[ProductService]
 })
 export class ProductComponent implements OnInit {
-  constructor(private alertifyService:AlertifyService, private prductService:ProductService) {
+  constructor(private alertifyService:AlertifyService, private prductService:ProductService, private activatedRoute:ActivatedRoute) {
     
   }
   
@@ -21,9 +22,12 @@ export class ProductComponent implements OnInit {
   products: Product[] = [];
   
   ngOnInit(): void {
-    this.prductService.getProducts().subscribe((data)=>{
-      this.products = data
+    this.activatedRoute.params.subscribe(params=>{
+      this.prductService.getProducts(params["categoryId"]).subscribe((data)=>{
+        this.products = data
+      })
     })
+    
   }
 
   addToCart(product:Product){

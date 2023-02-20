@@ -5,23 +5,27 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable()
 export class ProductService {
-  
-  constructor(private http:HttpClient) { }
+
+  constructor(private http: HttpClient) { }
   path = "http://localhost:3000/products"
 
-  getProducts():Observable<Product[]> {
-    return this.http.get<Product[]>(this.path).pipe(
-      tap(data=>console.log(JSON.stringify(data))),
+  getProducts(categoryId: number): Observable<Product[]> {
+    let newPath = this.path
+    if (categoryId) {
+      newPath = newPath + "?categoryId=" + categoryId
+    }
+    return this.http.get<Product[]>(newPath).pipe(
+      tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
     )
   }
-  handleError(err : HttpErrorResponse) {
-    let errorMessage:string
+  handleError(err: HttpErrorResponse) {
+    let errorMessage: string
     if (err.error instanceof ErrorEvent) {
-      errorMessage="Bir Hata Oluştu"
-    }else{
-      errorMessage ="Sistemsel Bir Hata!!"
+      errorMessage = "Bir Hata Oluştu"
+    } else {
+      errorMessage = "Sistemsel Bir Hata!!"
     }
-    return throwError(()=>new Error(errorMessage))
+    return throwError(() => new Error(errorMessage))
   }
 }
