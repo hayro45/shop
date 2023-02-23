@@ -14,6 +14,7 @@ import { Product } from '../product';
   providers:[CategoryService, ProductService]
 })
 export class ProductsAddForm1Component {
+
   
   constructor(private categoryService:CategoryService, private productService:ProductService, private alertifyService:AlertifyService){
 
